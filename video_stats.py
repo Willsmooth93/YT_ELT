@@ -33,12 +33,12 @@ def get_playlist_id():
         raise e
     
 
-def get_video_ids(playlist_id):
+def get_video_ids(playlistid):
     
     video_ids = []
     pageToken = None
 
-    base_url = f"https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults={maxResults}&playlistId={playlist_id}&key={API_KEY}"
+    base_url = f"https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults={maxResults}&playlistId={playlistid}&key={API_KEY}"
 
     try:
         while True:
