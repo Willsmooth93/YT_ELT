@@ -25,9 +25,9 @@ def get_playlist_id():
         #print(json.dumps(data, indent=4))
 
         channel_items = data["items"][0]
-        channel_playlist_id = channel_items["contentDetails"]["relatedPlaylists"]["uploads"]
-        #print(channel_playlist_id)
-        return channel_playlist_id
+        channel_playlistid = channel_items["contentDetails"]["relatedPlaylists"]["uploads"]
+        #print(channel_playlistid)
+        return channel_playlistid
     
     except requests.exceptions.RequestException as e:
         raise e
