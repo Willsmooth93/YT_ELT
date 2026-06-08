@@ -10,15 +10,14 @@ from datetime import date
 from airflow.decorators import task
 from airflow.models import Variable
 
-API_KEY = Variable.get("API_KEY")
-
-CHANNEL_HANDLE = Variable.get('CHANNEL_HANDLE')
 maxResults = 50
 
 @task
 def get_playlist_id():
     
     try:
+        API_KEY = Variable.get("API_KEY")
+        CHANNEL_HANDLE = Variable.get('CHANNEL_HANDLE')
 
         url = f"https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle={CHANNEL_HANDLE}&key={API_KEY}"
 
@@ -44,6 +43,8 @@ def get_video_ids(playlistid):
     video_ids = []
     pageToken = None
 
+    # Retrieve API_KEY inside the task function
+    API_KEY = Variable.get("API_KEY")
     base_url = f"https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults={maxResults}&playlistId={playlistid}&key={API_KEY}"
 
     try:
@@ -79,6 +80,8 @@ def get_video_ids(playlistid):
 @task
 def extract_video_data(video_ids):
 
+    # Retrieve API_KEY inside the task function
+    API_KEY = Variable.get("API_KEY")
     extracted_data = []
 
     def batch_list(video_id_list, batch_size):
